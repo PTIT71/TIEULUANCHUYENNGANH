@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.agrisystem.LoginActivity"></activity>
+        <activity android:name=".activity.agrisystem.DetailDeviceActivity"></activity>
+        <activity android:name=".activity.agrisystem.LoginActivity" />
         <activity android:name=".activity.agrisystem.ViewAllDeviceActivity" /> <!-- Add Google Map Library -->
         <uses-library android:name="com.google.android.maps" /> <!-- Google API Key -->
         <meta-data

@@ -1,5 +1,6 @@
 package com.material.components.activity.agrisystem;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
@@ -39,6 +40,7 @@ public class ViewAllDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_device);
+        parent_view = findViewById(android.R.id.content);
 
         initComponent();
         intReadyDevice();
@@ -64,6 +66,7 @@ public class ViewAllDeviceActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, Integer obj, int position) {
                 Snackbar.make(parent_view, "Item " + position + " clicked", Snackbar.LENGTH_SHORT).show();
+                startActivity(new Intent(ViewAllDeviceActivity.this, DetailDeviceActivity.class));
             }
         });
 

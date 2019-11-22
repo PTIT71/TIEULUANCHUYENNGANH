@@ -22,7 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_xxxxlarge"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/spacing_large"
@@ -54,46 +54,7 @@
 
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <!-- Device connect -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Ready Device"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:minWidth="0dp"
-                android:text="Disconnected"
-                android:textColor="@color/grey_60" />
-
-        </LinearLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewReady"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:scrollingCache="true" />
-
-    </LinearLayout>
 
 
     <android.support.design.widget.BottomNavigationView
@@ -105,6 +66,6 @@
         android:background="@android:color/white"
         app:itemIconTint="@drawable/color_state_primary"
         app:itemTextColor="@drawable/color_state_primary"
-        app:menu="@menu/menu_bottom_navigation_basic" />
+        app:menu="@menu/menu_bottom_navigation_all_device" />
 
 </RelativeLayout>
