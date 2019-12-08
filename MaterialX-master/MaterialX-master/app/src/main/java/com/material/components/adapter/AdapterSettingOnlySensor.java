@@ -10,12 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.material.components.R;
-import com.material.components.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterDetailDevice  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterSettingOnlySensor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Integer> items = new ArrayList<>();
 
     private OnLoadMoreListener onLoadMoreListener;
@@ -23,7 +22,7 @@ public class AdapterDetailDevice  extends RecyclerView.Adapter<RecyclerView.View
     private Context ctx;
     private OnItemClickListener mOnItemClickListener;
 
-    public AdapterDetailDevice(Context context, List<Integer> items) {
+    public AdapterSettingOnlySensor(Context context, List<Integer> items) {
         this.items = items;
         ctx = context;
     }
@@ -58,7 +57,7 @@ public class AdapterDetailDevice  extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_sensor_device, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_sensor, parent, false);
         vh = new OriginalViewHolder(v);
         return vh;
     }

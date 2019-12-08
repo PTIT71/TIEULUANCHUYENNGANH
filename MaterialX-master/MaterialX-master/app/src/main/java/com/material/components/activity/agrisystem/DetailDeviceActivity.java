@@ -1,5 +1,6 @@
 package com.material.components.activity.agrisystem;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,6 +27,10 @@ import com.material.components.R;
 import  com.material.components.adapter.AdapterDetailDevice;
 import  com.material.components.adapter.AdapterDetailDeviceMonitor;
 import com.material.components.data.DataGenerator;
+import com.material.components.fragment.FragmentControlMonitor;
+import com.material.components.fragment.FragmentFeedback;
+import com.material.components.fragment.FragmentSettingDevice;
+import com.material.components.fragment.FragmentStatistical;
 import com.material.components.fragment.FragmentViewNotificationDevice;
 import com.material.components.fragment.FragmentViewStatusDevice;
 import com.material.components.fragment.testFragment;
@@ -118,6 +124,8 @@ public class DetailDeviceActivity extends AppCompatActivity {
 
     }
 
+
+
     private void onItemNavigationClicked(MenuItem item) {
             Fragment setlectFragment =null;
             switch (item.getItemId()) {
@@ -127,6 +135,22 @@ public class DetailDeviceActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_notification:
                     setlectFragment = new FragmentViewNotificationDevice();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_fragment, setlectFragment).commit();
+                    break;
+                case R.id.nav_control:
+                    setlectFragment = new FragmentControlMonitor();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_fragment, setlectFragment).commit();
+                    break;
+                case R.id.nav_statistical:
+                    setlectFragment = new FragmentStatistical();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_fragment, setlectFragment).commit();
+                    break;
+                case R.id.nav_settings:
+                    setlectFragment = new FragmentSettingDevice();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_fragment, setlectFragment).commit();
+                    break;
+                case R.id.nav_help:
+                    setlectFragment = new FragmentFeedback();
                     getSupportFragmentManager().beginTransaction().replace(R.id.bottom_fragment, setlectFragment).commit();
                     break;
                 default:

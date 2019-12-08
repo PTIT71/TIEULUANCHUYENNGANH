@@ -1,14 +1,19 @@
 package com.material.components.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import com.material.components.R;
 import com.material.components.adapter.AdapterDetailDevice;
 import com.material.components.adapter.AdapterDetailDeviceMonitor;
@@ -39,6 +44,7 @@ import  com.material.components.adapter.AdapterDetailDeviceMonitor;
 import com.material.components.data.DataGenerator;
 import com.material.components.fragment.FragmentViewStatusDevice;
 import com.material.components.fragment.testFragment;
+import com.material.components.model.Event;
 import com.material.components.utils.Tools;
 import com.material.components.widget.SpacingItemDecoration;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -81,7 +87,7 @@ public class FragmentViewStatusDevice extends Fragment {
         recyclerView2.setAdapter(mAdapter2);
     }
 
-    private void initViewStatus(View  root)
+    private void initViewStatus(final View  root)
     {
 
         //AVAILABLE DEVICE
@@ -102,12 +108,37 @@ public class FragmentViewStatusDevice extends Fragment {
         mAdapter.setOnItemClickListener(new AdapterDetailDevice.OnItemClickListener() {
             @Override
             public void onItemClick(View view, Integer obj, int position) {
-              //  Snackbar.make(parent_view, "Item " + position + " clicked", Snackbar.LENGTH_SHORT).show();
+                showConfirmDialog(root);
             }
         });
 
 
     }
+
+    private void showConfirmDialog(final View  root) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(root.getContext());
+        builder.setTitle("Bạn chắc chắn muốn thay đổi?");
+        builder.setMessage("Hoạt động này sẽ làm thay đổi những cài đặt trước đó");
+        builder.setPositiveButton(R.string.AGREE, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                showDialogFullscreen(root);
+            }
+        });
+        builder.setNegativeButton(R.string.DISAGREE, null);
+        builder.show();
+    }
+
+    private void showDialogFullscreen(final View  root) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        Fragment setlectFragment = new FragmentSettingOnlySensor();
+        //        // newFragment.setRequestCode(DIALOG_QUEST_CODE);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.bottom_fragment, setlectFragment).commit();
+
+    }
+
+
 
 
 }

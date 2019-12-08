@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import android.widget.Toast;
 import com.material.components.R;
 import com.material.components.adapter.AdapterViewAllDevice;
 import com.material.components.data.DataGenerator;
+import com.material.components.fragment.FragmentSettingGeneral;
 import com.material.components.fragment.FragmentViewAllDevice;
+import com.material.components.fragment.FragmentViewAllNotification;
 import com.material.components.utils.Tools;
 import com.material.components.widget.SpacingItemDecoration;
 
@@ -48,6 +51,7 @@ public class ViewAllDeviceActivity extends AppCompatActivity {
 
     }
 
+
     private void initComponent() {
         //init app bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,22 +66,25 @@ public class ViewAllDeviceActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment setlectFragment =null;
                 switch (item.getItemId()) {
-                    case R.id.navigation_recent:
-                        mTextMessage.setText(item.getTitle());
+                    case R.id.navigation_device:
+                        setlectFragment = new FragmentViewAllDevice();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, setlectFragment).commit();
                         return true;
-                    case R.id.navigation_favorites:
-                        mTextMessage.setText(item.getTitle());
+                    case R.id.navigation_notification:
+                        setlectFragment = new FragmentViewAllNotification();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, setlectFragment).commit();
                         return true;
-                    case R.id.navigation_nearby:
-                        mTextMessage.setText(item.getTitle());
+                    case R.id.navigation_setting:
+                        setlectFragment = new FragmentSettingGeneral();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, setlectFragment).commit();
                         return true;
                 }
                 Toast.makeText(ViewAllDeviceActivity.this, mTextMessage.getText(), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
-
 
 
     }
