@@ -2,112 +2,85 @@ package com.material.components.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.material.components.R;
-import com.material.components.adapter.AdapterDetailDevice;
-import com.material.components.adapter.AdapterDetailDeviceMonitor;
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.material.components.R;
-
-import  com.material.components.adapter.AdapterDetailDevice;
-import  com.material.components.adapter.AdapterDetailDeviceMonitor;
+import com.material.components.activity.list.ListMultiSelection;
+import com.material.components.adapter.AdapterDetailDevice;
+import com.material.components.adapter.AdapterDetailDeviceMonitor;
+import com.material.components.adapter.AdapterListInbox;
+import com.material.components.adapter.AdapterListMessage;
+import com.material.components.adapter.AdapterListSectioned;
 import com.material.components.data.DataGenerator;
-import com.material.components.fragment.FragmentViewStatusDevice;
-import com.material.components.fragment.testFragment;
+import com.material.components.model.Inbox;
+import com.material.components.model.People;
 import com.material.components.utils.Tools;
+import com.material.components.widget.LineItemDecoration;
 import com.material.components.widget.SpacingItemDecoration;
-import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
 
 
-
-public class FragmentViewStatusDevice extends Fragment {
+public class FragmentViewNotificationDevice extends Fragment {
 
     private RecyclerView recyclerView;
-    private AdapterDetailDevice mAdapter;
-    private RecyclerView recyclerView2;
-    private AdapterDetailDeviceMonitor mAdapter2;
+    private AdapterListMessage mAdapter;
+    View root;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable  ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root =  inflater.inflate(R.layout.fragment_view_detail_device, container, false);
-        initMotitor(root);
-        initViewStatus(root);
-
+        root =  inflater.inflate(R.layout.fragment_view_notification_device, container, false);
+        initComponent(root);
         return root;
     }
 
 
-    private  void  initMotitor(View  root)
-    {
-
-        //AVAILABLE DEVICE
-        recyclerView2 = (RecyclerView) root.findViewById(R.id.recyclerView2);
-        recyclerView2.setLayoutManager(new GridLayoutManager(root.getContext(), 2));
-        recyclerView2.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(root.getContext(), 3), true));
-        recyclerView2.setHasFixedSize(true);
-        List<Integer> items = DataGenerator.getNatureImages(root.getContext());
-        items.addAll(DataGenerator.getNatureImages(root.getContext()));
-        //set data and list adapter
-        mAdapter2 = new AdapterDetailDeviceMonitor(root.getContext(), items);
-        recyclerView2.setAdapter(mAdapter2);
-    }
-
-    private void initViewStatus(View  root)
-    {
-
-        //AVAILABLE DEVICE
+    private void initComponent(View root) {
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(root.getContext(), 2));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(root.getContext(), 3), true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        //Set lại trong souxe là 3
-        List<Integer> items = DataGenerator.getNatureImages(root.getContext());
-        items.addAll(DataGenerator.getNatureImages(root.getContext()));
+        List<People> items = DataGenerator.getPeopleData(root.getContext());
+        items.addAll(DataGenerator.getPeopleData(root.getContext()));
+        items.addAll(DataGenerator.getPeopleData(root.getContext()));
+
+        int sect_count = 0;
+        int sect_idx = 0;
+        List<String> months = DataGenerator.getStringsMonth(root.getContext());
+        for (int i = 0; i < items.size() / 6; i++) {
+            items.add(sect_count, new People(months.get(sect_idx), true));
+            sect_count = sect_count + 5;
+            sect_idx++;
+        }
 
         //set data and list adapter
-        mAdapter = new AdapterDetailDevice(root.getContext(), items);
+        mAdapter = new AdapterListMessage(root.getContext(), items);
         recyclerView.setAdapter(mAdapter);
 
         // on item list clicked
-        mAdapter.setOnItemClickListener(new AdapterDetailDevice.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new AdapterListMessage.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, Integer obj, int position) {
-              //  Snackbar.make(parent_view, "Item " + position + " clicked", Snackbar.LENGTH_SHORT).show();
+            public void onItemClick(View view, People obj, int position) {
+                //Snackbar.make(parent_view, "Item " + obj.name + " clicked", Snackbar.LENGTH_SHORT).show();
             }
         });
 
-
     }
+
 
 
 }

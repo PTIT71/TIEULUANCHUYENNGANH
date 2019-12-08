@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.material.components.R;
 import com.material.components.adapter.AdapterViewAllDevice;
 import com.material.components.data.DataGenerator;
+import com.material.components.fragment.FragmentViewAllDevice;
 import com.material.components.utils.Tools;
 import com.material.components.widget.SpacingItemDecoration;
 
@@ -41,58 +42,16 @@ public class ViewAllDeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_device);
         parent_view = findViewById(android.R.id.content);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new FragmentViewAllDevice()).commit();
 
         initComponent();
-        intReadyDevice();
+
     }
-    private void intReadyDevice() {
-        //Set lại trong souxe là 3
-        List<Integer> items = DataGenerator.getNatureImages(this);
-        items.addAll(DataGenerator.getNatureImages(this));
 
-        //AVAILABLE DEVICE
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 3), true));
-        recyclerView.setHasFixedSize(true);
-
-
-        //set data and list adapter
-        mAdapter = new AdapterViewAllDevice(this, items);
-        recyclerView.setAdapter(mAdapter);
-
-        // on item list clicked
-        mAdapter.setOnItemClickListener(new AdapterViewAllDevice.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, Integer obj, int position) {
-                Snackbar.make(parent_view, "Item " + position + " clicked", Snackbar.LENGTH_SHORT).show();
-                startActivity(new Intent(ViewAllDeviceActivity.this, DetailDeviceActivity.class));
-            }
-        });
-
-        //READY AVAILBLE
-/*
-        recyclerViewReady = (RecyclerView) findViewById(R.id.recyclerViewReady);
-        recyclerViewReady.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerViewReady.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 3), true));
-        recyclerViewReady.setHasFixedSize(true);
-
-        //set data and list adapter
-        mAdapterReady = new AdapterViewAllDevice(this, items);
-        recyclerViewReady.setAdapter(mAdapterReady);
-
-        // on item list clicked
-        mAdapterReady.setOnItemClickListener(new AdapterViewAllDevice.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, Integer obj, int position) {
-                Snackbar.make(parent_view, "Item " + position + " clicked", Snackbar.LENGTH_SHORT).show();
-            }
-        });
-*/
-    }
     private void initComponent() {
         //init app bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
         toolbar.setNavigationIcon(R.drawable.ic_indruino_white);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Agribot System");
@@ -118,8 +77,7 @@ public class ViewAllDeviceActivity extends AppCompatActivity {
                 return false;
             }
         });
-        Tools.setSystemBarColor(this, R.color.grey_5);
-        Tools.setSystemBarLight(this);
+
 
 
     }

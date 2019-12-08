@@ -63,7 +63,7 @@ public class AdapterListSectioned extends RecyclerView.Adapter<RecyclerView.View
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         if (viewType == VIEW_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_people_chat, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_inbox, parent, false);
             vh = new OriginalViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section, parent, false);

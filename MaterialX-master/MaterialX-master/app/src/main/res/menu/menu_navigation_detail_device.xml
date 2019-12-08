@@ -6,7 +6,7 @@
         android:id="@+id/grp_1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_all_inbox"
+            android:id="@+id/nav_status"
             android:checked="true"
             android:icon="@drawable/ic_move_to_inbox"
             android:title="Status device"
@@ -22,12 +22,12 @@
             android:title="Notifications"
             app:actionLayout="@layout/badge_navigation_plain" />
         <item
-            android:id="@+id/nav_priority_inbox"
+            android:id="@+id/nav_control"
             android:icon="@drawable/ic_label"
             android:title="Control Monitor"
             app:actionLayout="@layout/badge_navigation_colored" />
         <item
-            android:id="@+id/nav_social"
+            android:id="@+id/nav_statistical"
             android:icon="@drawable/ic_peoples"
             android:title="Statistical"
             app:actionLayout="@layout/badge_navigation_colored" />

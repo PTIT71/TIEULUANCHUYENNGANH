@@ -32,14 +32,15 @@ public class AdapterListInbox extends RecyclerView.Adapter<AdapterListInbox.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView from, email, message, date, image_letter;
+        public TextView from, email, message, date, image_letter, name;
         public ImageView image;
         public RelativeLayout lyt_checked, lyt_image;
         public View lyt_parent;
 
         public ViewHolder(View view) {
             super(view);
-            from = (TextView) view.findViewById(R.id.from);
+            //from = (TextView) view.findViewById(R.id.from);
+            name = (TextView) view.findViewById(R.id.name);
             email = (TextView) view.findViewById(R.id.email);
             message = (TextView) view.findViewById(R.id.message);
             date = (TextView) view.findViewById(R.id.date);
