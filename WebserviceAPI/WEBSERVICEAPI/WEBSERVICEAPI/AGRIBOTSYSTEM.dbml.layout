@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.5, 11.5" name="AGRIBOTSYSTEM">
+  <DataContextMoniker Name="/AGRIBOTSYSTEMDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9fc8eeea-9502-4a1d-a210-13a367aa897c" absoluteBounds="2.125, 1.5, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/DEVICE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="45907141-0e04-4296-a968-bed59445178a" absoluteBounds="2.1399999999999997, 1.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="693dfad9-28e2-4a12-8052-cb27be9c186b" absoluteBounds="1.875, 4.125, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/DVMT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d97c904-55e0-404b-8275-72d719c89f7a" absoluteBounds="1.8900000000000006, 4.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cec61111-0725-47eb-9855-c61149d7b0d5" absoluteBounds="9.125, 4.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/SENSOR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b79637fe-aefe-4a50-b6e9-cf6b2b3c88a4" absoluteBounds="9.14, 5.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="394e6772-bd2e-4bfb-aa00-8da343a40611" absoluteBounds="3, 7, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/MONITOR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="345de383-0e5e-47f6-a747-7961b3eed631" absoluteBounds="3.0149999999999997, 7.4600000000000009, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="26aff502-fda6-4d2d-ba56-d5aa2a7a5812" absoluteBounds="9.25, 1.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/DVSS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fbc3fcb0-2113-44aa-a18b-5676805ce783" absoluteBounds="9.265, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9f8b32ea-8f6d-403d-bb3c-ebb082e03620" absoluteBounds="1.5, 10, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/TYPE_MT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77dd8629-0cf4-452e-9088-f3719075187b" absoluteBounds="1.5150000000000006, 10.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fb9dfd77-b633-40e1-aecf-39b629d9876d" absoluteBounds="6, 6.5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/TYPE_SS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5dc50381-d060-4db3-bfe4-fd1b87fbc578" absoluteBounds="6.0150000000000006, 6.9600000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c4a95af1-a54f-46d9-850b-57439b65757f" absoluteBounds="8.75, 9.25, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/AGRIBOTSYSTEMDataContext/USER" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1de55c93-acc4-49c0-ba8c-a723670332e5" absoluteBounds="8.765, 9.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3 : 2.8862939453125); (3 : 4.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AGRIBOTSYSTEMDataContext/DEVICE/DEVICE_DVMT" />
+      <nodes>
+        <classShapeMoniker Id="9fc8eeea-9502-4a1d-a210-13a367aa897c" />
+        <classShapeMoniker Id="693dfad9-28e2-4a12-8052-cb27be9c186b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.4375 : 7); (3.4375 : 5.31899251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AGRIBOTSYSTEMDataContext/MONITOR/MONITOR_DVMT" />
+      <nodes>
+        <classShapeMoniker Id="394e6772-bd2e-4bfb-aa00-8da343a40611" />
+        <classShapeMoniker Id="693dfad9-28e2-4a12-8052-cb27be9c186b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.125 : 2.31814697265625); (9.25 : 2.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AGRIBOTSYSTEMDataContext/DEVICE/DEVICE_DVSS" />
+      <nodes>
+        <classShapeMoniker Id="9fc8eeea-9502-4a1d-a210-13a367aa897c" />
+        <classShapeMoniker Id="26aff502-fda6-4d2d-ba56-d5aa2a7a5812" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.1875 : 4.75); (10.1875 : 2.94399251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AGRIBOTSYSTEMDataContext/SENSOR/SENSOR_DVSS" />
+      <nodes>
+        <classShapeMoniker Id="cec61111-0725-47eb-9855-c61149d7b0d5" />
+        <classShapeMoniker Id="26aff502-fda6-4d2d-ba56-d5aa2a7a5812" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.25 : 10); (3.25 : 8.57859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AGRIBOTSYSTEMDataContext/TYPE_MT/TYPE_MT_MONITOR" />
+      <nodes>
+        <classShapeMoniker Id="9f8b32ea-8f6d-403d-bb3c-ebb082e03620" />
+        <classShapeMoniker Id="394e6772-bd2e-4bfb-aa00-8da343a40611" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8 : 7.20359587760417); (10.125 : 7.20359587760417); (10.125 : 6.7131982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AGRIBOTSYSTEMDataContext/TYPE_SS/TYPE_SS_SENSOR" />
+      <nodes>
+        <classShapeMoniker Id="fb9dfd77-b633-40e1-aecf-39b629d9876d" />
+        <classShapeMoniker Id="cec61111-0725-47eb-9855-c61149d7b0d5" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
