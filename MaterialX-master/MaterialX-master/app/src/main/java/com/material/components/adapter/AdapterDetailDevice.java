@@ -10,25 +10,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.material.components.R;
+import com.material.components.model.Device;
+import com.material.components.model.SensorDevice;
 import com.material.components.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterDetailDevice  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Integer> items = new ArrayList<>();
+    private List<SensorDevice> items = new ArrayList<>();
 
     private OnLoadMoreListener onLoadMoreListener;
 
     private Context ctx;
     private OnItemClickListener mOnItemClickListener;
 
-    public AdapterDetailDevice(Context context, List<Integer> items) {
+    public AdapterDetailDevice(Context context, List<SensorDevice> items) {
         this.items = items;
         ctx = context;
     }
     public interface OnItemClickListener {
-        void onItemClick(View view, Integer obj, int position);
+        void onItemClick(View view, SensorDevice obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -38,17 +40,20 @@ public class AdapterDetailDevice  extends RecyclerView.Adapter<RecyclerView.View
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView name;
-        public TextView dv_description;
+        public TextView max;
+        public TextView min;
+        public TextView currentvalue;
         public ImageButton btnMore;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
-            /*
-            image = (ImageView) v.findViewById(R.id.image);
-            name = (TextView) v.findViewById(R.id.name);
-            dv_description = (TextView) v.findViewById(R.id.dv_description);
-            btnMore = (ImageButton) v.findViewById(R.id.btnMore);*/
+
+            image = (ImageView) v.findViewById(R.id.unitSensor);
+            name = (TextView) v.findViewById(R.id.namesensor);
+            max = (TextView) v.findViewById(R.id.max);
+            min = (TextView) v.findViewById(R.id.min);
+            currentvalue = (TextView) v.findViewById(R.id.valueCurent);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
 
 
@@ -69,8 +74,20 @@ public class AdapterDetailDevice  extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
 
+            if(items.get(position).getType() == 1)
+            {
+                view.image.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_image_tempurachure_unit));
+            }
+            else
+            {
+                view.image.setImageDrawable(ctx.getResources().getDrawable(R.drawable.phantram));
+            }
            // Tools.displayImageOriginal(ctx, view.image, items.get(position));
-            //view.name.setText("IMG_" + position + ".jpg");
+            view.currentvalue.setText(items.get(position).getCurrentvalue());
+            view.name.setText(items.get(position).getName());
+            view.max.setText("Max: " + items.get(position).getMaxvalue());
+            view.min.setText("Min: "+ items.get(position).getMinvalue());
+           // view.name.setText(items.get(position).getName());
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

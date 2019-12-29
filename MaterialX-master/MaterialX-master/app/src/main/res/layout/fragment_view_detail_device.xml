@@ -85,11 +85,12 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="NGÀY"
+                                                android:text="DAY"
                                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                                 android:textColor="@color/light_blue_50" />
 
                                             <TextView
+                                                android:id="@+id/numberOfDay"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="24"
@@ -98,6 +99,7 @@
                                                 app:fontFamily="sans-serif-medium" />
 
                                             <TextView
+                                                android:id="@+id/dateStart"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="20/10/2019"
@@ -114,6 +116,7 @@
                                             android:paddingLeft="100dp"
                                             android:orientation="vertical">
                                             <TextView
+                                                android:id="@+id/NameDevice"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Trụ 1 trồng rau xà lách"
@@ -123,6 +126,7 @@
                                                 app:fontFamily="sans-serif-medium" />
 
                                             <TextView
+                                                android:id="@+id/subDescription"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:text="Trụ trồng chơi thôi muốn ăn ra hái"
@@ -145,15 +149,15 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="100dp"
                                 android:orientation="horizontal">
 
                                 <android.support.v7.widget.RecyclerView
                                     android:id="@+id/recyclerView2"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="80dp"
                                     android:scrollbars="vertical"
-                                    android:scrollingCache="true" />
+                                    android:scrollingCache="false" />
 
                                 <View
                                     android:layout_width="@dimen/spacing_small"

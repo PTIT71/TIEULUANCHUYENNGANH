@@ -117,7 +117,7 @@ public class DetailDeviceActivity extends AppCompatActivity {
         });
 
         // open drawer at start
-        drawer.openDrawer(GravityCompat.START);
+      //  drawer.openDrawer(GravityCompat.START);
         updateCounter(nav_view);
         menu_navigation = nav_view.getMenu();
 

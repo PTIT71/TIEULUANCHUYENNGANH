@@ -10,24 +10,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.material.components.R;
+import com.material.components.model.Monitor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterDetailDeviceMonitor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Integer> items = new ArrayList<>();
+    private List<Monitor> items = new ArrayList<>();
 
     private OnLoadMoreListener onLoadMoreListener;
 
     private Context ctx;
     private OnItemClickListener mOnItemClickListener;
 
-    public AdapterDetailDeviceMonitor(Context context, List<Integer> items) {
+    public AdapterDetailDeviceMonitor(Context context, List<Monitor> items) {
         this.items = items;
         ctx = context;
     }
     public interface OnItemClickListener {
-        void onItemClick(View view, Integer obj, int position);
+        void onItemClick(View view, Monitor obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -35,22 +36,19 @@ public class AdapterDetailDeviceMonitor extends RecyclerView.Adapter<RecyclerVie
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
+
         public TextView name;
-        public TextView dv_description;
-        public ImageButton btnMore;
+        public TextView status;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
-            /*
-            image = (ImageView) v.findViewById(R.id.image);
-            name = (TextView) v.findViewById(R.id.name);
-            dv_description = (TextView) v.findViewById(R.id.dv_description);
-            btnMore = (ImageButton) v.findViewById(R.id.btnMore);
+
+            name = (TextView) v.findViewById(R.id.nameMonitor);
+            status = (TextView) v.findViewById(R.id.statusMonitor);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
 
-             */
+
         }
     }
 
@@ -67,9 +65,17 @@ public class AdapterDetailDeviceMonitor extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
-            /*
-            Tools.displayImageOriginal(ctx, view.image, items.get(position));
-            view.name.setText("IMG_" + position + ".jpg");
+
+            //Tools.displayImageOriginal(ctx, view.image, items.get(position));
+            view.name.setText(items.get(position).getName());
+            if(items.get(position).getStatus() == 1)
+            {
+                view.status.setText("Đang hoạt động");
+            }
+            else
+            {
+                view.status.setText("Đang bị tắt");
+            }
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -79,7 +85,7 @@ public class AdapterDetailDeviceMonitor extends RecyclerView.Adapter<RecyclerVie
                 }
             });
 
-             */
+
         }
     }
 

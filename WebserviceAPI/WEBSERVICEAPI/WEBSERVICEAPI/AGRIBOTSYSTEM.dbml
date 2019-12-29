@@ -1,32 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AGRISBOTSYSTEM" Class="AGRIBOTSYSTEMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-HLFU42S\SQLEXPRESS;Initial Catalog=AGRISBOTSYSTEM;Persist Security Info=True;User ID=thinhpvp" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AGRISBOTSYSTEMConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.DEVICE" Member="DEVICEs">
-    <Type Name="DEVICE">
-      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
-      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="DEVICE_DVMT" Member="DVMTs" ThisKey="ID" OtherKey="IDDV" Type="DVMT" />
-      <Association Name="DEVICE_DVSS" Member="DVSSes" ThisKey="ID" OtherKey="IDDV" Type="DVSS" />
+  <Table Name="dbo.USR_DV" Member="USR_DVs">
+    <Type Name="USR_DV">
+      <Column Name="IDUSR" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDDV" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DateConnect" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="USER_USR_DV" Member="USER" ThisKey="IDUSR" OtherKey="ID" Type="USER" IsForeignKey="true" />
+      <Association Name="DEVICE_USR_DV" Member="DEVICE" ThisKey="IDDV" OtherKey="ID" Type="DEVICE" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DVMT" Member="DVMTs">
     <Type Name="DVMT">
       <Column Name="IDDV" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IDMT" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="DEVICE_DVMT" Member="DEVICE" ThisKey="IDDV" OtherKey="ID" Type="DEVICE" IsForeignKey="true" />
       <Association Name="MONITOR_DVMT" Member="MONITOR" ThisKey="IDMT" OtherKey="ID" Type="MONITOR" IsForeignKey="true" />
+      <Association Name="DEVICE_DVMT" Member="DEVICE" ThisKey="IDDV" OtherKey="ID" Type="DEVICE" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.SENSOR" Member="SENSORs">
-    <Type Name="SENSOR">
-      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
-      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NUMBER" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="UNIT" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="TYPE" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Association Name="SENSOR_DVSS" Member="DVSSes" ThisKey="ID" OtherKey="IDSS" Type="DVSS" />
-      <Association Name="TYPE_SS_SENSOR" Member="TYPE_SS" ThisKey="TYPE" OtherKey="ID" Type="TYPE_SS" IsForeignKey="true" />
+  <Table Name="dbo.DVSS" Member="DVSSes">
+    <Type Name="DVSS">
+      <Column Name="IDDV" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDSS" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="SENSOR_DVSS" Member="SENSOR" ThisKey="IDSS" OtherKey="ID" Type="SENSOR" IsForeignKey="true" />
+      <Association Name="DEVICE_DVSS" Member="DEVICE" ThisKey="IDDV" OtherKey="ID" Type="DEVICE" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MONITOR" Member="MONITORs">
@@ -39,12 +35,17 @@
       <Association Name="TYPE_MT_MONITOR" Member="TYPE_MT" ThisKey="TYPE" OtherKey="ID" Type="TYPE_MT" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.DVSS" Member="DVSSes">
-    <Type Name="DVSS">
-      <Column Name="IDDV" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="IDSS" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="DEVICE_DVSS" Member="DEVICE" ThisKey="IDDV" OtherKey="ID" Type="DEVICE" IsForeignKey="true" />
-      <Association Name="SENSOR_DVSS" Member="SENSOR" ThisKey="IDSS" OtherKey="ID" Type="SENSOR" IsForeignKey="true" />
+  <Table Name="dbo.SENSOR" Member="SENSORs">
+    <Type Name="SENSOR">
+      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NUMBER" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="UNIT" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="TYPE" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="SENSOR_DVSS" Member="DVSSes" ThisKey="ID" OtherKey="IDSS" Type="DVSS" />
+      <Association Name="SENSOR_WARNINGSMAX" Member="WARNINGSMAXes" ThisKey="ID" OtherKey="IDSS" Type="WARNINGSMAX" />
+      <Association Name="TYPE_SS_SENSOR" Member="TYPE_SS" ThisKey="TYPE" OtherKey="ID" Type="TYPE_SS" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TYPE_MT" Member="TYPE_MTs">
@@ -69,6 +70,30 @@
       <Column Name="NAME" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="ADDRESS" Type="System.String" DbType="NChar(200)" CanBeNull="true" />
       <Column Name="NUMPHONE" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="USER_USR_DV" Member="USR_DVs" ThisKey="ID" OtherKey="IDUSR" Type="USR_DV" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DEVICE" Member="DEVICEs">
+    <Type Name="DEVICE">
+      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PARTCODE" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DESCRIPTION" Type="System.String" DbType="NChar(255)" CanBeNull="true" />
+      <Column Name="STARTDATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SUBDESCRIPTION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="DEVICE_USR_DV" Member="USR_DVs" ThisKey="ID" OtherKey="IDDV" Type="USR_DV" />
+      <Association Name="DEVICE_DVMT" Member="DVMTs" ThisKey="ID" OtherKey="IDDV" Type="DVMT" />
+      <Association Name="DEVICE_DVSS" Member="DVSSes" ThisKey="ID" OtherKey="IDDV" Type="DVSS" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WARNINGSMAX" Member="WARNINGSMAXes">
+    <Type Name="WARNINGSMAX">
+      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDSS" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VALUE" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="MESSAGE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="SENSOR_WARNINGSMAX" Member="SENSOR" ThisKey="IDSS" OtherKey="ID" Type="SENSOR" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -1,6 +1,7 @@
 package com.material.components.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,25 +12,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.material.components.R;
+import com.material.components.model.Device;
 import com.material.components.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterViewAllDevice extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Integer> items = new ArrayList<>();
+    private List<Device> items = new ArrayList<>();
 
     private OnLoadMoreListener onLoadMoreListener;
 
     private Context ctx;
     private OnItemClickListener mOnItemClickListener;
 
-    public AdapterViewAllDevice(Context context, List<Integer> items) {
+    public AdapterViewAllDevice(Context context, List<Device> items) {
         this.items = items;
         ctx = context;
     }
     public interface OnItemClickListener {
-        void onItemClick(View view, Integer obj, int position);
+        void onItemClick(View view, Device obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -66,8 +68,11 @@ public class AdapterViewAllDevice extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
-            Tools.displayImageOriginal(ctx, view.image, items.get(position));
-            view.name.setText("IMG_" + position + ".jpg");
+           // Tools.displayImageOriginal(ctx, view.image, items.get(position));
+
+            view.image.setImageDrawable(ctx.getResources().getDrawable(R.drawable.avatartdevce));
+            view.name.setText(items.get(position).getName());
+            view.dv_description.setText(items.get(position).getStartDate().substring(0,10));
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -50,6 +50,7 @@ public class FragmentViewNotificationDevice extends Fragment {
 
 
     private void initComponent(View root) {
+        /*
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         recyclerView.setHasFixedSize(true);
@@ -78,7 +79,7 @@ public class FragmentViewNotificationDevice extends Fragment {
                 //Snackbar.make(parent_view, "Item " + obj.name + " clicked", Snackbar.LENGTH_SHORT).show();
             }
         });
-
+*/
     }
 
 

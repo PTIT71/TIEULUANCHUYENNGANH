@@ -34,6 +34,7 @@
                 android:src="@drawable/ic_tempurature"
                  />
             <TextView
+                android:id="@+id/namesensor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nhiệt độ"
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:gravity="end">
             <TextView
+                android:id="@+id/valueCurent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
@@ -53,6 +55,7 @@
 
 
                 <ImageView
+                    android:id="@+id/unitSensor"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
@@ -63,10 +66,18 @@
 
             </RelativeLayout>
             <TextView
+                android:id="@+id/max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max: 30 - Min 65"
                android:textSize="12dp"
+                android:textColor="@color/grey_40" />
+            <TextView
+                android:id="@+id/min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max: 30 - Min 65"
+                android:textSize="12dp"
                 android:textColor="@color/grey_40" />
 
         </LinearLayout>

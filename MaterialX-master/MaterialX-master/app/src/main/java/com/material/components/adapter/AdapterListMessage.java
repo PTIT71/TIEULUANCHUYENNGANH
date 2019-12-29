@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.material.components.R;
+import com.material.components.model.Message;
 import com.material.components.model.People;
 import com.material.components.utils.Tools;
 
@@ -20,19 +21,19 @@ public class AdapterListMessage  extends RecyclerView.Adapter<RecyclerView.ViewH
     private final int VIEW_ITEM = 1;
     private final int VIEW_SECTION = 0;
 
-    private List<People> items = new ArrayList<>();
+    private List<Message> items = new ArrayList<>();
     private Context ctx;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, People obj, int position);
+        void onItemClick(View view, Message obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = mItemClickListener;
     }
 
-    public AdapterListMessage(Context context, List<People> items) {
+    public AdapterListMessage(Context context, List<Message> items) {
         this.items = items;
         ctx = context;
     }
@@ -40,12 +41,16 @@ public class AdapterListMessage  extends RecyclerView.Adapter<RecyclerView.ViewH
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView name;
+        public TextView message;
+        public TextView date;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
             name = (TextView) v.findViewById(R.id.name);
+            message = (TextView) v.findViewById(R.id.message);
+            date = (TextView) v.findViewById(R.id.date);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
         }
     }
@@ -75,12 +80,15 @@ public class AdapterListMessage  extends RecyclerView.Adapter<RecyclerView.ViewH
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        People p = items.get(position);
+        Message p = items.get(position);
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
 
-            view.name.setText(p.name);
-            Tools.displayImageRound(ctx, view.image, p.image);
+            view.name.setText(p.getNameDevice());
+            view.message.setText(p.getMessageContent());
+            view.date.setText(p.getHour());
+            view.image.setImageDrawable(ctx.getResources().getDrawable(R.drawable.avatartdevce));
+           // Tools.displayImageRound(ctx, view.image, p.image);
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -91,7 +99,7 @@ public class AdapterListMessage  extends RecyclerView.Adapter<RecyclerView.ViewH
             });
         } else {
             SectionViewHolder view = (SectionViewHolder) holder;
-            view.title_section.setText(p.name);
+            view.title_section.setText(p.getDate().toString());
         }
     }
 
@@ -102,10 +110,11 @@ public class AdapterListMessage  extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        return this.items.get(position).section ? VIEW_SECTION : VIEW_ITEM;
+        return this.items.get(position).isSection() ? VIEW_SECTION : VIEW_ITEM;
+        //return 0;
     }
 
-    public void insertItem(int index, People people){
+    public void insertItem(int index, Message people){
         items.add(index, people);
         notifyItemInserted(index);
     }

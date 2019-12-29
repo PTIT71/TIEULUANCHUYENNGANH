@@ -30,21 +30,21 @@ namespace WEBSERVICEAPI
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertDEVICE(DEVICE instance);
-    partial void UpdateDEVICE(DEVICE instance);
-    partial void DeleteDEVICE(DEVICE instance);
+    partial void InsertUSR_DV(USR_DV instance);
+    partial void UpdateUSR_DV(USR_DV instance);
+    partial void DeleteUSR_DV(USR_DV instance);
     partial void InsertDVMT(DVMT instance);
     partial void UpdateDVMT(DVMT instance);
     partial void DeleteDVMT(DVMT instance);
-    partial void InsertSENSOR(SENSOR instance);
-    partial void UpdateSENSOR(SENSOR instance);
-    partial void DeleteSENSOR(SENSOR instance);
-    partial void InsertMONITOR(MONITOR instance);
-    partial void UpdateMONITOR(MONITOR instance);
-    partial void DeleteMONITOR(MONITOR instance);
     partial void InsertDVSS(DVSS instance);
     partial void UpdateDVSS(DVSS instance);
     partial void DeleteDVSS(DVSS instance);
+    partial void InsertMONITOR(MONITOR instance);
+    partial void UpdateMONITOR(MONITOR instance);
+    partial void DeleteMONITOR(MONITOR instance);
+    partial void InsertSENSOR(SENSOR instance);
+    partial void UpdateSENSOR(SENSOR instance);
+    partial void DeleteSENSOR(SENSOR instance);
     partial void InsertTYPE_MT(TYPE_MT instance);
     partial void UpdateTYPE_MT(TYPE_MT instance);
     partial void DeleteTYPE_MT(TYPE_MT instance);
@@ -54,6 +54,12 @@ namespace WEBSERVICEAPI
     partial void InsertUSER(USER instance);
     partial void UpdateUSER(USER instance);
     partial void DeleteUSER(USER instance);
+    partial void InsertDEVICE(DEVICE instance);
+    partial void UpdateDEVICE(DEVICE instance);
+    partial void DeleteDEVICE(DEVICE instance);
+    partial void InsertWARNINGSMAX(WARNINGSMAX instance);
+    partial void UpdateWARNINGSMAX(WARNINGSMAX instance);
+    partial void DeleteWARNINGSMAX(WARNINGSMAX instance);
     #endregion
 		
 		public AGRIBOTSYSTEMDataContext() : 
@@ -86,11 +92,11 @@ namespace WEBSERVICEAPI
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<DEVICE> DEVICEs
+		public System.Data.Linq.Table<USR_DV> USR_DVs
 		{
 			get
 			{
-				return this.GetTable<DEVICE>();
+				return this.GetTable<USR_DV>();
 			}
 		}
 		
@@ -102,11 +108,11 @@ namespace WEBSERVICEAPI
 			}
 		}
 		
-		public System.Data.Linq.Table<SENSOR> SENSORs
+		public System.Data.Linq.Table<DVSS> DVSSes
 		{
 			get
 			{
-				return this.GetTable<SENSOR>();
+				return this.GetTable<DVSS>();
 			}
 		}
 		
@@ -118,11 +124,11 @@ namespace WEBSERVICEAPI
 			}
 		}
 		
-		public System.Data.Linq.Table<DVSS> DVSSes
+		public System.Data.Linq.Table<SENSOR> SENSORs
 		{
 			get
 			{
-				return this.GetTable<DVSS>();
+				return this.GetTable<SENSOR>();
 			}
 		}
 		
@@ -149,126 +155,192 @@ namespace WEBSERVICEAPI
 				return this.GetTable<USER>();
 			}
 		}
+		
+		public System.Data.Linq.Table<DEVICE> DEVICEs
+		{
+			get
+			{
+				return this.GetTable<DEVICE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WARNINGSMAX> WARNINGSMAXes
+		{
+			get
+			{
+				return this.GetTable<WARNINGSMAX>();
+			}
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DEVICE")]
-	public partial class DEVICE : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.USR_DV")]
+	public partial class USR_DV : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _ID;
+		private string _IDUSR;
 		
-		private string _NAME;
+		private string _IDDV;
 		
-		private System.Nullable<int> _STATUS;
+		private System.Nullable<System.DateTime> _DateConnect;
 		
-		private EntitySet<DVMT> _DVMTs;
+		private EntityRef<USER> _USER;
 		
-		private EntitySet<DVSS> _DVSSes;
+		private EntityRef<DEVICE> _DEVICE;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(string value);
-    partial void OnIDChanged();
-    partial void OnNAMEChanging(string value);
-    partial void OnNAMEChanged();
-    partial void OnSTATUSChanging(System.Nullable<int> value);
-    partial void OnSTATUSChanged();
+    partial void OnIDUSRChanging(string value);
+    partial void OnIDUSRChanged();
+    partial void OnIDDVChanging(string value);
+    partial void OnIDDVChanged();
+    partial void OnDateConnectChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateConnectChanged();
     #endregion
 		
-		public DEVICE()
+		public USR_DV()
 		{
-			this._DVMTs = new EntitySet<DVMT>(new Action<DVMT>(this.attach_DVMTs), new Action<DVMT>(this.detach_DVMTs));
-			this._DVSSes = new EntitySet<DVSS>(new Action<DVSS>(this.attach_DVSSes), new Action<DVSS>(this.detach_DVSSes));
+			this._USER = default(EntityRef<USER>);
+			this._DEVICE = default(EntityRef<DEVICE>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDUSR", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IDUSR
 		{
 			get
 			{
-				return this._ID;
+				return this._IDUSR;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._IDUSR != value))
 				{
-					this.OnIDChanging(value);
+					if (this._USER.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDUSRChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
+					this._IDUSR = value;
+					this.SendPropertyChanged("IDUSR");
+					this.OnIDUSRChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="NChar(50)")]
-		public string NAME
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDV", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IDDV
 		{
 			get
 			{
-				return this._NAME;
+				return this._IDDV;
 			}
 			set
 			{
-				if ((this._NAME != value))
+				if ((this._IDDV != value))
 				{
-					this.OnNAMEChanging(value);
+					if (this._DEVICE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDDVChanging(value);
 					this.SendPropertyChanging();
-					this._NAME = value;
-					this.SendPropertyChanged("NAME");
-					this.OnNAMEChanged();
+					this._IDDV = value;
+					this.SendPropertyChanged("IDDV");
+					this.OnIDDVChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
-		public System.Nullable<int> STATUS
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateConnect", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateConnect
 		{
 			get
 			{
-				return this._STATUS;
+				return this._DateConnect;
 			}
 			set
 			{
-				if ((this._STATUS != value))
+				if ((this._DateConnect != value))
 				{
-					this.OnSTATUSChanging(value);
+					this.OnDateConnectChanging(value);
 					this.SendPropertyChanging();
-					this._STATUS = value;
-					this.SendPropertyChanged("STATUS");
-					this.OnSTATUSChanged();
+					this._DateConnect = value;
+					this.SendPropertyChanged("DateConnect");
+					this.OnDateConnectChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVMT", Storage="_DVMTs", ThisKey="ID", OtherKey="IDDV")]
-		public EntitySet<DVMT> DVMTs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="USER_USR_DV", Storage="_USER", ThisKey="IDUSR", OtherKey="ID", IsForeignKey=true)]
+		public USER USER
 		{
 			get
 			{
-				return this._DVMTs;
+				return this._USER.Entity;
 			}
 			set
 			{
-				this._DVMTs.Assign(value);
+				USER previousValue = this._USER.Entity;
+				if (((previousValue != value) 
+							|| (this._USER.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._USER.Entity = null;
+						previousValue.USR_DVs.Remove(this);
+					}
+					this._USER.Entity = value;
+					if ((value != null))
+					{
+						value.USR_DVs.Add(this);
+						this._IDUSR = value.ID;
+					}
+					else
+					{
+						this._IDUSR = default(string);
+					}
+					this.SendPropertyChanged("USER");
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVSS", Storage="_DVSSes", ThisKey="ID", OtherKey="IDDV")]
-		public EntitySet<DVSS> DVSSes
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_USR_DV", Storage="_DEVICE", ThisKey="IDDV", OtherKey="ID", IsForeignKey=true)]
+		public DEVICE DEVICE
 		{
 			get
 			{
-				return this._DVSSes;
+				return this._DEVICE.Entity;
 			}
 			set
 			{
-				this._DVSSes.Assign(value);
+				DEVICE previousValue = this._DEVICE.Entity;
+				if (((previousValue != value) 
+							|| (this._DEVICE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DEVICE.Entity = null;
+						previousValue.USR_DVs.Remove(this);
+					}
+					this._DEVICE.Entity = value;
+					if ((value != null))
+					{
+						value.USR_DVs.Add(this);
+						this._IDDV = value.ID;
+					}
+					else
+					{
+						this._IDDV = default(string);
+					}
+					this.SendPropertyChanged("DEVICE");
+				}
 			}
 		}
 		
@@ -291,30 +363,6 @@ namespace WEBSERVICEAPI
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_DVMTs(DVMT entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEVICE = this;
-		}
-		
-		private void detach_DVMTs(DVMT entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEVICE = null;
-		}
-		
-		private void attach_DVSSes(DVSS entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEVICE = this;
-		}
-		
-		private void detach_DVSSes(DVSS entity)
-		{
-			this.SendPropertyChanging();
-			entity.DEVICE = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DVMT")]
@@ -327,9 +375,9 @@ namespace WEBSERVICEAPI
 		
 		private string _IDMT;
 		
-		private EntityRef<DEVICE> _DEVICE;
-		
 		private EntityRef<MONITOR> _MONITOR;
+		
+		private EntityRef<DEVICE> _DEVICE;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -343,8 +391,8 @@ namespace WEBSERVICEAPI
 		
 		public DVMT()
 		{
-			this._DEVICE = default(EntityRef<DEVICE>);
 			this._MONITOR = default(EntityRef<MONITOR>);
+			this._DEVICE = default(EntityRef<DEVICE>);
 			OnCreated();
 		}
 		
@@ -396,40 +444,6 @@ namespace WEBSERVICEAPI
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVMT", Storage="_DEVICE", ThisKey="IDDV", OtherKey="ID", IsForeignKey=true)]
-		public DEVICE DEVICE
-		{
-			get
-			{
-				return this._DEVICE.Entity;
-			}
-			set
-			{
-				DEVICE previousValue = this._DEVICE.Entity;
-				if (((previousValue != value) 
-							|| (this._DEVICE.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DEVICE.Entity = null;
-						previousValue.DVMTs.Remove(this);
-					}
-					this._DEVICE.Entity = value;
-					if ((value != null))
-					{
-						value.DVMTs.Add(this);
-						this._IDDV = value.ID;
-					}
-					else
-					{
-						this._IDDV = default(string);
-					}
-					this.SendPropertyChanged("DEVICE");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MONITOR_DVMT", Storage="_MONITOR", ThisKey="IDMT", OtherKey="ID", IsForeignKey=true)]
 		public MONITOR MONITOR
 		{
@@ -464,6 +478,40 @@ namespace WEBSERVICEAPI
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVMT", Storage="_DEVICE", ThisKey="IDDV", OtherKey="ID", IsForeignKey=true)]
+		public DEVICE DEVICE
+		{
+			get
+			{
+				return this._DEVICE.Entity;
+			}
+			set
+			{
+				DEVICE previousValue = this._DEVICE.Entity;
+				if (((previousValue != value) 
+							|| (this._DEVICE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DEVICE.Entity = null;
+						previousValue.DVMTs.Remove(this);
+					}
+					this._DEVICE.Entity = value;
+					if ((value != null))
+					{
+						value.DVMTs.Add(this);
+						this._IDDV = value.ID;
+					}
+					else
+					{
+						this._IDDV = default(string);
+					}
+					this.SendPropertyChanged("DEVICE");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -485,220 +533,149 @@ namespace WEBSERVICEAPI
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SENSOR")]
-	public partial class SENSOR : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DVSS")]
+	public partial class DVSS : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _ID;
+		private string _IDDV;
 		
-		private string _NAME;
+		private string _IDSS;
 		
-		private System.Nullable<int> _STATUS;
+		private EntityRef<SENSOR> _SENSOR;
 		
-		private string _NUMBER;
-		
-		private string _UNIT;
-		
-		private string _TYPE;
-		
-		private EntitySet<DVSS> _DVSSes;
-		
-		private EntityRef<TYPE_SS> _TYPE_SS;
+		private EntityRef<DEVICE> _DEVICE;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(string value);
-    partial void OnIDChanged();
-    partial void OnNAMEChanging(string value);
-    partial void OnNAMEChanged();
-    partial void OnSTATUSChanging(System.Nullable<int> value);
-    partial void OnSTATUSChanged();
-    partial void OnNUMBERChanging(string value);
-    partial void OnNUMBERChanged();
-    partial void OnUNITChanging(string value);
-    partial void OnUNITChanged();
-    partial void OnTYPEChanging(string value);
-    partial void OnTYPEChanged();
+    partial void OnIDDVChanging(string value);
+    partial void OnIDDVChanged();
+    partial void OnIDSSChanging(string value);
+    partial void OnIDSSChanged();
     #endregion
 		
-		public SENSOR()
+		public DVSS()
 		{
-			this._DVSSes = new EntitySet<DVSS>(new Action<DVSS>(this.attach_DVSSes), new Action<DVSS>(this.detach_DVSSes));
-			this._TYPE_SS = default(EntityRef<TYPE_SS>);
+			this._SENSOR = default(EntityRef<SENSOR>);
+			this._DEVICE = default(EntityRef<DEVICE>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDV", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IDDV
 		{
 			get
 			{
-				return this._ID;
+				return this._IDDV;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._IDDV != value))
 				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="NChar(50)")]
-		public string NAME
-		{
-			get
-			{
-				return this._NAME;
-			}
-			set
-			{
-				if ((this._NAME != value))
-				{
-					this.OnNAMEChanging(value);
-					this.SendPropertyChanging();
-					this._NAME = value;
-					this.SendPropertyChanged("NAME");
-					this.OnNAMEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
-		public System.Nullable<int> STATUS
-		{
-			get
-			{
-				return this._STATUS;
-			}
-			set
-			{
-				if ((this._STATUS != value))
-				{
-					this.OnSTATUSChanging(value);
-					this.SendPropertyChanging();
-					this._STATUS = value;
-					this.SendPropertyChanged("STATUS");
-					this.OnSTATUSChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NUMBER", DbType="NChar(10)")]
-		public string NUMBER
-		{
-			get
-			{
-				return this._NUMBER;
-			}
-			set
-			{
-				if ((this._NUMBER != value))
-				{
-					this.OnNUMBERChanging(value);
-					this.SendPropertyChanging();
-					this._NUMBER = value;
-					this.SendPropertyChanged("NUMBER");
-					this.OnNUMBERChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UNIT", DbType="NChar(10)")]
-		public string UNIT
-		{
-			get
-			{
-				return this._UNIT;
-			}
-			set
-			{
-				if ((this._UNIT != value))
-				{
-					this.OnUNITChanging(value);
-					this.SendPropertyChanging();
-					this._UNIT = value;
-					this.SendPropertyChanged("UNIT");
-					this.OnUNITChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TYPE", DbType="NChar(10)")]
-		public string TYPE
-		{
-			get
-			{
-				return this._TYPE;
-			}
-			set
-			{
-				if ((this._TYPE != value))
-				{
-					if (this._TYPE_SS.HasLoadedOrAssignedValue)
+					if (this._DEVICE.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnTYPEChanging(value);
+					this.OnIDDVChanging(value);
 					this.SendPropertyChanging();
-					this._TYPE = value;
-					this.SendPropertyChanged("TYPE");
-					this.OnTYPEChanged();
+					this._IDDV = value;
+					this.SendPropertyChanged("IDDV");
+					this.OnIDDVChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SENSOR_DVSS", Storage="_DVSSes", ThisKey="ID", OtherKey="IDSS")]
-		public EntitySet<DVSS> DVSSes
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDSS", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IDSS
 		{
 			get
 			{
-				return this._DVSSes;
+				return this._IDSS;
 			}
 			set
 			{
-				this._DVSSes.Assign(value);
+				if ((this._IDSS != value))
+				{
+					if (this._SENSOR.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDSSChanging(value);
+					this.SendPropertyChanging();
+					this._IDSS = value;
+					this.SendPropertyChanged("IDSS");
+					this.OnIDSSChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TYPE_SS_SENSOR", Storage="_TYPE_SS", ThisKey="TYPE", OtherKey="ID", IsForeignKey=true)]
-		public TYPE_SS TYPE_SS
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SENSOR_DVSS", Storage="_SENSOR", ThisKey="IDSS", OtherKey="ID", IsForeignKey=true)]
+		public SENSOR SENSOR
 		{
 			get
 			{
-				return this._TYPE_SS.Entity;
+				return this._SENSOR.Entity;
 			}
 			set
 			{
-				TYPE_SS previousValue = this._TYPE_SS.Entity;
+				SENSOR previousValue = this._SENSOR.Entity;
 				if (((previousValue != value) 
-							|| (this._TYPE_SS.HasLoadedOrAssignedValue == false)))
+							|| (this._SENSOR.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._TYPE_SS.Entity = null;
-						previousValue.SENSORs.Remove(this);
+						this._SENSOR.Entity = null;
+						previousValue.DVSSes.Remove(this);
 					}
-					this._TYPE_SS.Entity = value;
+					this._SENSOR.Entity = value;
 					if ((value != null))
 					{
-						value.SENSORs.Add(this);
-						this._TYPE = value.ID;
+						value.DVSSes.Add(this);
+						this._IDSS = value.ID;
 					}
 					else
 					{
-						this._TYPE = default(string);
+						this._IDSS = default(string);
 					}
-					this.SendPropertyChanged("TYPE_SS");
+					this.SendPropertyChanged("SENSOR");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVSS", Storage="_DEVICE", ThisKey="IDDV", OtherKey="ID", IsForeignKey=true)]
+		public DEVICE DEVICE
+		{
+			get
+			{
+				return this._DEVICE.Entity;
+			}
+			set
+			{
+				DEVICE previousValue = this._DEVICE.Entity;
+				if (((previousValue != value) 
+							|| (this._DEVICE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DEVICE.Entity = null;
+						previousValue.DVSSes.Remove(this);
+					}
+					this._DEVICE.Entity = value;
+					if ((value != null))
+					{
+						value.DVSSes.Add(this);
+						this._IDDV = value.ID;
+					}
+					else
+					{
+						this._IDDV = default(string);
+					}
+					this.SendPropertyChanged("DEVICE");
 				}
 			}
 		}
@@ -721,18 +698,6 @@ namespace WEBSERVICEAPI
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_DVSSes(DVSS entity)
-		{
-			this.SendPropertyChanging();
-			entity.SENSOR = this;
-		}
-		
-		private void detach_DVSSes(DVSS entity)
-		{
-			this.SendPropertyChanging();
-			entity.SENSOR = null;
 		}
 	}
 	
@@ -939,149 +904,236 @@ namespace WEBSERVICEAPI
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DVSS")]
-	public partial class DVSS : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SENSOR")]
+	public partial class SENSOR : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _IDDV;
+		private string _ID;
 		
-		private string _IDSS;
+		private string _NAME;
 		
-		private EntityRef<DEVICE> _DEVICE;
+		private System.Nullable<int> _STATUS;
 		
-		private EntityRef<SENSOR> _SENSOR;
+		private string _NUMBER;
+		
+		private string _UNIT;
+		
+		private string _TYPE;
+		
+		private EntitySet<DVSS> _DVSSes;
+		
+		private EntitySet<WARNINGSMAX> _WARNINGSMAXes;
+		
+		private EntityRef<TYPE_SS> _TYPE_SS;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDDVChanging(string value);
-    partial void OnIDDVChanged();
-    partial void OnIDSSChanging(string value);
-    partial void OnIDSSChanged();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnNAMEChanging(string value);
+    partial void OnNAMEChanged();
+    partial void OnSTATUSChanging(System.Nullable<int> value);
+    partial void OnSTATUSChanged();
+    partial void OnNUMBERChanging(string value);
+    partial void OnNUMBERChanged();
+    partial void OnUNITChanging(string value);
+    partial void OnUNITChanged();
+    partial void OnTYPEChanging(string value);
+    partial void OnTYPEChanged();
     #endregion
 		
-		public DVSS()
+		public SENSOR()
 		{
-			this._DEVICE = default(EntityRef<DEVICE>);
-			this._SENSOR = default(EntityRef<SENSOR>);
+			this._DVSSes = new EntitySet<DVSS>(new Action<DVSS>(this.attach_DVSSes), new Action<DVSS>(this.detach_DVSSes));
+			this._WARNINGSMAXes = new EntitySet<WARNINGSMAX>(new Action<WARNINGSMAX>(this.attach_WARNINGSMAXes), new Action<WARNINGSMAX>(this.detach_WARNINGSMAXes));
+			this._TYPE_SS = default(EntityRef<TYPE_SS>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDV", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string IDDV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
 		{
 			get
 			{
-				return this._IDDV;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._IDDV != value))
+				if ((this._ID != value))
 				{
-					if (this._DEVICE.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDDVChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._IDDV = value;
-					this.SendPropertyChanged("IDDV");
-					this.OnIDDVChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDSS", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string IDSS
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="NChar(50)")]
+		public string NAME
 		{
 			get
 			{
-				return this._IDSS;
+				return this._NAME;
 			}
 			set
 			{
-				if ((this._IDSS != value))
+				if ((this._NAME != value))
 				{
-					if (this._SENSOR.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDSSChanging(value);
+					this.OnNAMEChanging(value);
 					this.SendPropertyChanging();
-					this._IDSS = value;
-					this.SendPropertyChanged("IDSS");
-					this.OnIDSSChanged();
+					this._NAME = value;
+					this.SendPropertyChanged("NAME");
+					this.OnNAMEChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVSS", Storage="_DEVICE", ThisKey="IDDV", OtherKey="ID", IsForeignKey=true)]
-		public DEVICE DEVICE
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
+		public System.Nullable<int> STATUS
 		{
 			get
 			{
-				return this._DEVICE.Entity;
+				return this._STATUS;
 			}
 			set
 			{
-				DEVICE previousValue = this._DEVICE.Entity;
+				if ((this._STATUS != value))
+				{
+					this.OnSTATUSChanging(value);
+					this.SendPropertyChanging();
+					this._STATUS = value;
+					this.SendPropertyChanged("STATUS");
+					this.OnSTATUSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NUMBER", DbType="NChar(10)")]
+		public string NUMBER
+		{
+			get
+			{
+				return this._NUMBER;
+			}
+			set
+			{
+				if ((this._NUMBER != value))
+				{
+					this.OnNUMBERChanging(value);
+					this.SendPropertyChanging();
+					this._NUMBER = value;
+					this.SendPropertyChanged("NUMBER");
+					this.OnNUMBERChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UNIT", DbType="NChar(10)")]
+		public string UNIT
+		{
+			get
+			{
+				return this._UNIT;
+			}
+			set
+			{
+				if ((this._UNIT != value))
+				{
+					this.OnUNITChanging(value);
+					this.SendPropertyChanging();
+					this._UNIT = value;
+					this.SendPropertyChanged("UNIT");
+					this.OnUNITChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TYPE", DbType="NChar(10)")]
+		public string TYPE
+		{
+			get
+			{
+				return this._TYPE;
+			}
+			set
+			{
+				if ((this._TYPE != value))
+				{
+					if (this._TYPE_SS.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTYPEChanging(value);
+					this.SendPropertyChanging();
+					this._TYPE = value;
+					this.SendPropertyChanged("TYPE");
+					this.OnTYPEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SENSOR_DVSS", Storage="_DVSSes", ThisKey="ID", OtherKey="IDSS")]
+		public EntitySet<DVSS> DVSSes
+		{
+			get
+			{
+				return this._DVSSes;
+			}
+			set
+			{
+				this._DVSSes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SENSOR_WARNINGSMAX", Storage="_WARNINGSMAXes", ThisKey="ID", OtherKey="IDSS")]
+		public EntitySet<WARNINGSMAX> WARNINGSMAXes
+		{
+			get
+			{
+				return this._WARNINGSMAXes;
+			}
+			set
+			{
+				this._WARNINGSMAXes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TYPE_SS_SENSOR", Storage="_TYPE_SS", ThisKey="TYPE", OtherKey="ID", IsForeignKey=true)]
+		public TYPE_SS TYPE_SS
+		{
+			get
+			{
+				return this._TYPE_SS.Entity;
+			}
+			set
+			{
+				TYPE_SS previousValue = this._TYPE_SS.Entity;
 				if (((previousValue != value) 
-							|| (this._DEVICE.HasLoadedOrAssignedValue == false)))
+							|| (this._TYPE_SS.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._DEVICE.Entity = null;
-						previousValue.DVSSes.Remove(this);
+						this._TYPE_SS.Entity = null;
+						previousValue.SENSORs.Remove(this);
 					}
-					this._DEVICE.Entity = value;
+					this._TYPE_SS.Entity = value;
 					if ((value != null))
 					{
-						value.DVSSes.Add(this);
-						this._IDDV = value.ID;
+						value.SENSORs.Add(this);
+						this._TYPE = value.ID;
 					}
 					else
 					{
-						this._IDDV = default(string);
+						this._TYPE = default(string);
 					}
-					this.SendPropertyChanged("DEVICE");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SENSOR_DVSS", Storage="_SENSOR", ThisKey="IDSS", OtherKey="ID", IsForeignKey=true)]
-		public SENSOR SENSOR
-		{
-			get
-			{
-				return this._SENSOR.Entity;
-			}
-			set
-			{
-				SENSOR previousValue = this._SENSOR.Entity;
-				if (((previousValue != value) 
-							|| (this._SENSOR.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SENSOR.Entity = null;
-						previousValue.DVSSes.Remove(this);
-					}
-					this._SENSOR.Entity = value;
-					if ((value != null))
-					{
-						value.DVSSes.Add(this);
-						this._IDSS = value.ID;
-					}
-					else
-					{
-						this._IDSS = default(string);
-					}
-					this.SendPropertyChanged("SENSOR");
+					this.SendPropertyChanged("TYPE_SS");
 				}
 			}
 		}
@@ -1104,6 +1156,30 @@ namespace WEBSERVICEAPI
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_DVSSes(DVSS entity)
+		{
+			this.SendPropertyChanging();
+			entity.SENSOR = this;
+		}
+		
+		private void detach_DVSSes(DVSS entity)
+		{
+			this.SendPropertyChanging();
+			entity.SENSOR = null;
+		}
+		
+		private void attach_WARNINGSMAXes(WARNINGSMAX entity)
+		{
+			this.SendPropertyChanging();
+			entity.SENSOR = this;
+		}
+		
+		private void detach_WARNINGSMAXes(WARNINGSMAX entity)
+		{
+			this.SendPropertyChanging();
+			entity.SENSOR = null;
 		}
 	}
 	
@@ -1353,6 +1429,8 @@ namespace WEBSERVICEAPI
 		
 		private string _NUMPHONE;
 		
+		private EntitySet<USR_DV> _USR_DVs;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1373,6 +1451,7 @@ namespace WEBSERVICEAPI
 		
 		public USER()
 		{
+			this._USR_DVs = new EntitySet<USR_DV>(new Action<USR_DV>(this.attach_USR_DVs), new Action<USR_DV>(this.detach_USR_DVs));
 			OnCreated();
 		}
 		
@@ -1492,6 +1571,499 @@ namespace WEBSERVICEAPI
 					this._NUMPHONE = value;
 					this.SendPropertyChanged("NUMPHONE");
 					this.OnNUMPHONEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="USER_USR_DV", Storage="_USR_DVs", ThisKey="ID", OtherKey="IDUSR")]
+		public EntitySet<USR_DV> USR_DVs
+		{
+			get
+			{
+				return this._USR_DVs;
+			}
+			set
+			{
+				this._USR_DVs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_USR_DVs(USR_DV entity)
+		{
+			this.SendPropertyChanging();
+			entity.USER = this;
+		}
+		
+		private void detach_USR_DVs(USR_DV entity)
+		{
+			this.SendPropertyChanging();
+			entity.USER = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DEVICE")]
+	public partial class DEVICE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ID;
+		
+		private string _PARTCODE;
+		
+		private string _NAME;
+		
+		private System.Nullable<int> _STATUS;
+		
+		private string _DESCRIPTION;
+		
+		private System.Nullable<System.DateTime> _STARTDATE;
+		
+		private string _SUBDESCRIPTION;
+		
+		private EntitySet<USR_DV> _USR_DVs;
+		
+		private EntitySet<DVMT> _DVMTs;
+		
+		private EntitySet<DVSS> _DVSSes;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnPARTCODEChanging(string value);
+    partial void OnPARTCODEChanged();
+    partial void OnNAMEChanging(string value);
+    partial void OnNAMEChanged();
+    partial void OnSTATUSChanging(System.Nullable<int> value);
+    partial void OnSTATUSChanged();
+    partial void OnDESCRIPTIONChanging(string value);
+    partial void OnDESCRIPTIONChanged();
+    partial void OnSTARTDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnSTARTDATEChanged();
+    partial void OnSUBDESCRIPTIONChanging(string value);
+    partial void OnSUBDESCRIPTIONChanged();
+    #endregion
+		
+		public DEVICE()
+		{
+			this._USR_DVs = new EntitySet<USR_DV>(new Action<USR_DV>(this.attach_USR_DVs), new Action<USR_DV>(this.detach_USR_DVs));
+			this._DVMTs = new EntitySet<DVMT>(new Action<DVMT>(this.attach_DVMTs), new Action<DVMT>(this.detach_DVMTs));
+			this._DVSSes = new EntitySet<DVSS>(new Action<DVSS>(this.attach_DVSSes), new Action<DVSS>(this.detach_DVSSes));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PARTCODE", DbType="NChar(10)")]
+		public string PARTCODE
+		{
+			get
+			{
+				return this._PARTCODE;
+			}
+			set
+			{
+				if ((this._PARTCODE != value))
+				{
+					this.OnPARTCODEChanging(value);
+					this.SendPropertyChanging();
+					this._PARTCODE = value;
+					this.SendPropertyChanged("PARTCODE");
+					this.OnPARTCODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="NChar(50)")]
+		public string NAME
+		{
+			get
+			{
+				return this._NAME;
+			}
+			set
+			{
+				if ((this._NAME != value))
+				{
+					this.OnNAMEChanging(value);
+					this.SendPropertyChanging();
+					this._NAME = value;
+					this.SendPropertyChanged("NAME");
+					this.OnNAMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
+		public System.Nullable<int> STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this.OnSTATUSChanging(value);
+					this.SendPropertyChanging();
+					this._STATUS = value;
+					this.SendPropertyChanged("STATUS");
+					this.OnSTATUSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="NChar(255)")]
+		public string DESCRIPTION
+		{
+			get
+			{
+				return this._DESCRIPTION;
+			}
+			set
+			{
+				if ((this._DESCRIPTION != value))
+				{
+					this.OnDESCRIPTIONChanging(value);
+					this.SendPropertyChanging();
+					this._DESCRIPTION = value;
+					this.SendPropertyChanged("DESCRIPTION");
+					this.OnDESCRIPTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STARTDATE", DbType="Date")]
+		public System.Nullable<System.DateTime> STARTDATE
+		{
+			get
+			{
+				return this._STARTDATE;
+			}
+			set
+			{
+				if ((this._STARTDATE != value))
+				{
+					this.OnSTARTDATEChanging(value);
+					this.SendPropertyChanging();
+					this._STARTDATE = value;
+					this.SendPropertyChanged("STARTDATE");
+					this.OnSTARTDATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUBDESCRIPTION", DbType="NVarChar(MAX)")]
+		public string SUBDESCRIPTION
+		{
+			get
+			{
+				return this._SUBDESCRIPTION;
+			}
+			set
+			{
+				if ((this._SUBDESCRIPTION != value))
+				{
+					this.OnSUBDESCRIPTIONChanging(value);
+					this.SendPropertyChanging();
+					this._SUBDESCRIPTION = value;
+					this.SendPropertyChanged("SUBDESCRIPTION");
+					this.OnSUBDESCRIPTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_USR_DV", Storage="_USR_DVs", ThisKey="ID", OtherKey="IDDV")]
+		public EntitySet<USR_DV> USR_DVs
+		{
+			get
+			{
+				return this._USR_DVs;
+			}
+			set
+			{
+				this._USR_DVs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVMT", Storage="_DVMTs", ThisKey="ID", OtherKey="IDDV")]
+		public EntitySet<DVMT> DVMTs
+		{
+			get
+			{
+				return this._DVMTs;
+			}
+			set
+			{
+				this._DVMTs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DEVICE_DVSS", Storage="_DVSSes", ThisKey="ID", OtherKey="IDDV")]
+		public EntitySet<DVSS> DVSSes
+		{
+			get
+			{
+				return this._DVSSes;
+			}
+			set
+			{
+				this._DVSSes.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_USR_DVs(USR_DV entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEVICE = this;
+		}
+		
+		private void detach_USR_DVs(USR_DV entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEVICE = null;
+		}
+		
+		private void attach_DVMTs(DVMT entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEVICE = this;
+		}
+		
+		private void detach_DVMTs(DVMT entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEVICE = null;
+		}
+		
+		private void attach_DVSSes(DVSS entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEVICE = this;
+		}
+		
+		private void detach_DVSSes(DVSS entity)
+		{
+			this.SendPropertyChanging();
+			entity.DEVICE = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WARNINGSMAX")]
+	public partial class WARNINGSMAX : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ID;
+		
+		private string _IDSS;
+		
+		private string _VALUE;
+		
+		private string _MESSAGE;
+        public string IDSENSOR;
+        public string CURRENT;
+
+
+        private EntityRef<SENSOR> _SENSOR;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnIDSSChanging(string value);
+    partial void OnIDSSChanged();
+    partial void OnVALUEChanging(string value);
+    partial void OnVALUEChanged();
+    partial void OnMESSAGEChanging(string value);
+    partial void OnMESSAGEChanged();
+    #endregion
+		
+		public WARNINGSMAX()
+		{
+			this._SENSOR = default(EntityRef<SENSOR>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDSS", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IDSS
+		{
+			get
+			{
+				return this._IDSS;
+			}
+			set
+			{
+				if ((this._IDSS != value))
+				{
+					if (this._SENSOR.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDSSChanging(value);
+					this.SendPropertyChanging();
+					this._IDSS = value;
+					this.SendPropertyChanged("IDSS");
+					this.OnIDSSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VALUE", DbType="NChar(10)")]
+		public string VALUE
+		{
+			get
+			{
+				return this._VALUE;
+			}
+			set
+			{
+				if ((this._VALUE != value))
+				{
+					this.OnVALUEChanging(value);
+					this.SendPropertyChanging();
+					this._VALUE = value;
+					this.SendPropertyChanged("VALUE");
+					this.OnVALUEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MESSAGE", DbType="NVarChar(255)")]
+		public string MESSAGE
+		{
+			get
+			{
+				return this._MESSAGE;
+			}
+			set
+			{
+				if ((this._MESSAGE != value))
+				{
+					this.OnMESSAGEChanging(value);
+					this.SendPropertyChanging();
+					this._MESSAGE = value;
+					this.SendPropertyChanged("MESSAGE");
+					this.OnMESSAGEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SENSOR_WARNINGSMAX", Storage="_SENSOR", ThisKey="IDSS", OtherKey="ID", IsForeignKey=true)]
+		public SENSOR SENSOR
+		{
+			get
+			{
+				return this._SENSOR.Entity;
+			}
+			set
+			{
+				SENSOR previousValue = this._SENSOR.Entity;
+				if (((previousValue != value) 
+							|| (this._SENSOR.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SENSOR.Entity = null;
+						previousValue.WARNINGSMAXes.Remove(this);
+					}
+					this._SENSOR.Entity = value;
+					if ((value != null))
+					{
+						value.WARNINGSMAXes.Add(this);
+						this._IDSS = value.ID;
+					}
+					else
+					{
+						this._IDSS = default(string);
+					}
+					this.SendPropertyChanged("SENSOR");
 				}
 			}
 		}

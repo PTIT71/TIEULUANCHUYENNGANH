@@ -19,16 +19,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Available Device"
+            android:text="AGRIBOT DEVICE"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:minWidth="0dp"
-            android:text="Connected"
+            android:text="+ Add"
             android:textColor="@color/grey_60" />
 
     </LinearLayout>
